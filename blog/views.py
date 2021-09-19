@@ -20,6 +20,9 @@ def full_width(request):
 def about(request):
     return render(request,'about.html')
 
+def contact(request):
+    return render(request,'contact.html')
+
 def detail(request,pk):
     post=get_object_or_404(Post,pk=pk)
     md=markdown.Markdown(extensions=[
