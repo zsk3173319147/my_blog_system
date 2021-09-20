@@ -41,6 +41,9 @@ class Post(models.Model):
     # 文章的作者
     author = models.ForeignKey(User, on_delete=models.CASCADE)
 
+    # 新增views字段记录阅读量
+    views=models.PositiveIntegerField(default=0,editable=False)
+
     def __str__(self):
         return self.title
     
@@ -65,6 +68,10 @@ class Post(models.Model):
             self.excerpt = strip_tags(md.convert(self.body))[:200]
 
         super().save(*args, **kwargs)
+    
+    def increase_views(self):
+        self.views+=1
+        self.save(update_fields=['views'])
     
     class Meta:
         verbose_name = '文章'
