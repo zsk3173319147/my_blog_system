@@ -7,11 +7,9 @@
     <title>Black &amp; White</title>
 
     <!-- css -->
-    <!-- <link rel="stylesheet" href="css/bootstrap.min.css"> -->
+
     <link href="https://cdn.bootcss.com/highlight.js/9.15.8/styles/github.min.css" rel="stylesheet">
     <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-    <!-- <link rel="stylesheet" href="css/pace.css">
-    <link rel="stylesheet" href="css/custom.css"> -->
     <link rel="stylesheet" href="{% static 'blog/css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'blog/css/pace.css' %}">
     <link rel="stylesheet" href="{% static 'blog/css/custom.css' %}">
@@ -48,10 +46,6 @@
       </style>
 
     <!-- js -->
-    <!-- <script src="js/jquery-2.1.3.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/pace.min.js"></script>
-    <script src="js/modernizr.custom.js"></script> -->
     <script src="{% static 'blog/js/jquery-2.1.3.min.js' %}"></script>
     <script src="{% static 'blog/js/bootstrap.min.js' %}"></script>
     <script src="{% static 'blog/js/pace.min.js' %}"></script>
@@ -116,18 +110,21 @@
                     {% block main %}
                     {% endblock main %}
                 </main>
+            {%block sidebar %}
                 <aside class="col-md-4">
                 {% block toc %}
                 {% endblock toc %}
 
-                {% show_recent_posts %}
-                {% show_archives %}
-                {% show_categories %}
-                {% show_tags %}
+                
+                 {% show_recent_posts %}
+                 {% show_archives %}
+                 {% show_categories %}
+                 {% show_tags %}
                     <div class="rss">
                         <a href=""><span class="ion-social-rss-outline"></span> RSS 订阅</a>
                     </div>
                 </aside>
+            {% endblock sidebar%}
             </div>
         </div>
     </div>
@@ -137,7 +134,7 @@
                 <div class="col-md-12">
                     <p class="copyright">&copy 2017 - Collect from <a href="http://www.cssmoban.com/" target="_blank"
                             title="模板之家">模板之家</a>
-                        - Modified by <a href="http://zmrenwu.com/" title="网页模板" target="_blank">追梦人物的博客</a>
+                        - Modified by <a href="http://zmrenwu.com/" title="网页模板" target="_blank">追风少年的博客</a>
                     </p>
                 </div>
             </div>

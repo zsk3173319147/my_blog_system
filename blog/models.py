@@ -62,7 +62,7 @@ class Post(models.Model):
         # strip_tags 去掉 HTML 文本的全部 HTML 标签
         # 从文本摘取前 54 个字符赋给 excerpt
         if not self.excerpt.strip():
-            self.excerpt = strip_tags(md.convert(self.body))[:80]
+            self.excerpt = strip_tags(md.convert(self.body))[:200]
 
         super().save(*args, **kwargs)
     

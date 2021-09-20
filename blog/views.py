@@ -15,7 +15,11 @@ def index(request):
     })
 
 def full_width(request):
-    return render(request,'full-width.html')
+    post_list=Post.objects.all().order_by('-created_time')
+    return render(request,'full-width.html',context={
+        'post_list':post_list
+    })
+    # return render(request,'full-width.html')
 
 def about(request):
     return render(request,'about.html')

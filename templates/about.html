@@ -1,3 +1,4 @@
+{% extends 'base.html' %}
 {% load  static %}
 <!DOCTYPE html>
 <html>
@@ -72,6 +73,7 @@
 			<div class="container">
 				<div class="row">
 					<main class="col-md-12">
+					{% block main %}
 						<h1 class="page-title">About Me</h1>
 						<article class="post">
 							<div class="entry-content clearfix">
@@ -89,6 +91,7 @@
 								</ul>
 							</div>
 						</article>
+					{% endblock main %}
 					</main>
 				</div>
 			</div>
