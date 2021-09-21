@@ -7,6 +7,7 @@ from markdown.extensions.toc import TocExtension
 # 引入 Category 类
 from .models import Post, Category,Tag
 from django.views.generic import ListView,DetailView
+from pure_pagination.mixins import PaginationMixin
 # Create your views here.
 
 # def index(request):
@@ -16,7 +17,7 @@ from django.views.generic import ListView,DetailView
 #     })
 
 
-class IndexView(ListView):
+class IndexView(PaginationMixin,ListView):
     model=Post
     template_name='blog/index.html'
     context_object_name='post_list'
@@ -74,22 +75,22 @@ class PostDetailView(DetailView):
         # 视图必须返回一个 HttpResponse 对象
         return response
 
-    def get_object(self, queryset=None):
-        # 覆写 get_object 方法的目的是因为需要对 post 的 body 值进行渲染
-        post = super().get_object(queryset=None)
-        md = markdown.Markdown(extensions=[
-            'markdown.extensions.extra',
-            'markdown.extensions.codehilite',
-            # 记得在顶部引入 TocExtension 和 slugify
-            TocExtension(slugify=slugify),
-        ])
-        post.body = md.convert(post.body)
+    # def get_object(self, queryset=None):
+    #     # 覆写 get_object 方法的目的是因为需要对 post 的 body 值进行渲染
+    #     post = super().get_object(queryset=None)
+    #     md = markdown.Markdown(extensions=[
+    #         'markdown.extensions.extra',
+    #         'markdown.extensions.codehilite',
+    #         # 记得在顶部引入 TocExtension 和 slugify
+    #         TocExtension(slugify=slugify),
+    #     ])
+    #     post.body = md.convert(post.body)
 
-        m = re.search(
-            r'<div class="toc">\s*<ul>(.*)</ul>\s*</div>', md.toc, re.S)
-        post.toc = m.group(1) if m is not None else ''
+    #     m = re.search(
+    #         r'<div class="toc">\s*<ul>(.*)</ul>\s*</div>', md.toc, re.S)
+    #     post.toc = m.group(1) if m is not None else ''
 
-        return post
+    #     return post
 
 
 def archive(request, year, month):
