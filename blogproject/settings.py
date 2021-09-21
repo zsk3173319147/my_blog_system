@@ -25,7 +25,7 @@ SECRET_KEY = ')dm=rr(4$^hf%3wd*chbzde8soj)45&#*68-3dmb!*%zk^dyu5'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1','localhost','.zsk.com']
 
 
 # Application definition
@@ -121,10 +121,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = (
+STATIC_ROOT = (
     os.path.join(BASE_DIR, 'static').replace('\\', '/'),
     os.path.join(BASE_DIR,).replace('\\', '/'),
 )
+
 
 # django-pure-pagination 分页设置
 PAGINATION_SETTINGS = {
