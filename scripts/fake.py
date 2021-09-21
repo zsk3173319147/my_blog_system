@@ -30,9 +30,9 @@ if __name__ == '__main__':
     user = User.objects.create_superuser(
         'admin', 'admin@hellogithub.com', 'admin')
 
-    category_list = ['Python学习笔记', '开源项目', '工具资源', '程序员生活感悟', 'test category']
+    category_list = ['Python学习笔记', '开源项目', '工具资源', '程序员生活感悟', 'test category','Java学习笔记','LeetCode刷题','前端开学习笔记']
     tag_list = ['django', 'Python', 'Pipenv', 'Docker', 'Nginx',
-                'Elasticsearch', 'Gunicorn', 'Supervisor', 'test tag']
+                'Elasticsearch', 'Gunicorn', 'Supervisor', 'test tag','Java','linux','html/css','javascript']
     a_year_ago = timezone.now() - timedelta(days=365)
 
     print('create categories and tags')
@@ -44,13 +44,13 @@ if __name__ == '__main__':
 
     print('create a markdown sample post')
 
-    # Post.objects.create(
-    #     title='Markdown 与代码高亮测试',
-    #     body=pathlib.Path(BASE_DIR).joinpath(
-    #         'scripts', 'md.sample').read_text(encoding='utf-8'),
-    #     category=Category.objects.create(name='Markdown测试'),
-    #     author=user,
-    # )
+    Post.objects.create(
+        title='Faker生成大量假数据的测试',
+        body=pathlib.Path(BASE_DIR).joinpath(
+            'scripts', 'md.sample').read_text(encoding='utf-8'),
+        category=Category.objects.create(name='Markdown测试'),
+        author=user,
+    )
     print('create some faked posts published within the past year')
     fake = faker.Faker()  # English
     for _ in range(100):

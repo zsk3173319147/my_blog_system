@@ -1,10 +1,7 @@
-import re
-import markdown
-from django.shortcuts import get_object_or_404, render
+from django.contrib import messages
+from django.db.models import Q, query_utils
+from django.shortcuts import get_object_or_404, redirect, render
 from .models import Post
-from django.utils.text import slugify
-from markdown.extensions.toc import TocExtension
-# 引入 Category 类
 from .models import Post, Category,Tag
 from django.views.generic import ListView,DetailView
 from pure_pagination.mixins import PaginationMixin
@@ -117,3 +114,17 @@ def tag(request, pk):
     t = get_object_or_404(Tag, pk=pk)
     post_list = Post.objects.filter(tags=t).order_by('-created_time')
     return render(request, 'blog/index.html', context={'post_list': post_list})
+
+
+def search(request):
+    q = request.GET.get('q')
+
+    if not q:
+        error_msg = "请输入搜索关键词"
+        messages.add_message(request, messages.ERROR,
+                             error_msg, extra_tags='danger')
+        return redirect('blog:index')
+
+    post_list = Post.objects.filter(
+        Q(title__icontains=q) | query_utils(body__icontains=q))
+    return render(request, 'blog/index.html', {'post_list': post_list})
